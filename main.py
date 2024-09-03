@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import webserver
 
+TOKEN = os.getenv('TOKEN')
 # Configura gli intenti per il bot
 intents = discord.Intents.default()
 intents.message_content = True  # Abilita l'accesso al contenuto dei messaggi
