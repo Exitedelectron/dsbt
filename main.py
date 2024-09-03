@@ -1,14 +1,17 @@
 import discord
 from discord.ext import commands
-import os
-import webserver
+import webserver.py
 
-# Configura gli intent per il bot
+# Configura gli intenti per il bot
 intents = discord.Intents.default()
-intents.message_content = True  # Abilita l'accesso ai contenuti dei messaggi
+intents.message_content = True  # Abilita l'accesso al contenuto dei messaggi
 
-# Imposta il prefisso dei comandi del bot (es. !comando)
-bot = commands.Bot(command_prefix='!')
+# Se hai bisogno di intenti per membri o presenze, usa anche questi
+# intents.members = True
+# intents.presences = True
+
+# Crea l'istanza del bot con il prefisso dei comandi e gli intenti specificati
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 # Evento che viene chiamato quando il bot si connette e si è connesso a Discord
 @bot.event
