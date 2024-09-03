@@ -3,6 +3,9 @@ from discord.ext import commands
 import os
 import webserver
 
+# Configura gli intent per il bot
+intents = discord.Intents.default()
+intents.message_content = True  # Abilita l'accesso ai contenuti dei messaggi
 
 # Imposta il prefisso dei comandi del bot (es. !comando)
 bot = commands.Bot(command_prefix='!')
