@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-import webserver.py
 import webserver
 
 # Configura gli intenti per il bot
