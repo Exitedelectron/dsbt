@@ -27,4 +27,8 @@ async def ciao(ctx):
 
 # Avvio del bot (inserisci il tuo token del bot qui)
 webserver.keep_alive()
-bot.run(TOKEN)
+if TOKEN is None:
+    print("Errore: il token del bot non è stato trovato. Assicurati che la variabile d'ambiente 'TOKEN' sia impostata correttamente.")
+else:
+    # Avvio del bot utilizzando il token
+    bot.run(TOKEN)
