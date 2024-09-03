@@ -19,4 +19,4 @@ async def ciao(ctx):
 
 # Avvio del bot (inserisci il tuo token del bot qui)
 webserver.keep_alive()
-bot.run('MTIxMTQwNzg5NjA0NzUyNTg5OA.GyC-l6.3psAg364K2ku-1iQ1HbqM_AARVkrbPPrlDujcA')
+bot.run(TOKEN)
