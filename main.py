@@ -25,7 +25,10 @@ async def on_ready():
 # Comando slash che risponde con "Ciao!" quando l'utente invia il comando /ciao
 @tree.command(name='ciao', description='Risponde con Ciao!')
 async def ciao(interaction: discord.Interaction):
-    await interaction.response.send_message('Ciao!')
+    try:
+        await interaction.response.send_message('Ciao!')
+    except Exception as e:
+        print(f"Errore nell'invio del messaggio: {e}")
 
 # Avvio del bot (inserisci il tuo token del bot qui)
 webserver.keep_alive()
