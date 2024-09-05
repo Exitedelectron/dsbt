@@ -1,7 +1,6 @@
 import os
 import discord
 from discord import app_commands
-from discord.ext import commands
 import webserver
 
 TOKEN = os.getenv('TOKEN')
@@ -10,20 +9,20 @@ TOKEN = os.getenv('TOKEN')
 intents = discord.Intents.default()
 intents.message_content = True
 
-# Crea l'istanza del bot senza command_prefix
-bot = commands.Bot(intents=intents)
+# Crea l'istanza del client
+class MyClient(discord.Client):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.tree = app_commands.CommandTree(self)
 
-# Definisce un albero di comandi slash
-tree = bot.tree
+    async def on_ready(self):
+        await self.tree.sync()  # Sincronizza i comandi slash
+        print(f'{self.user} è connesso a Discord!')
 
-# Evento che viene chiamato quando il bot si connette e si è connesso a Discord
-@bot.event
-async def on_ready():
-    await tree.sync()  # Sincronizza i comandi slash
-    print(f'{bot.user} è connesso a Discord!')
+client = MyClient(intents=intents)
 
 # Comando slash che risponde con "Ciao!" quando l'utente invia il comando /ciao
-@tree.command(name='ciao', description='Risponde con Ciao!')
+@client.tree.command(name='ciao', description='Risponde con Ciao!')
 async def ciao(interaction: discord.Interaction):
     await interaction.response.send_message('Ciao!')
 
@@ -33,4 +32,4 @@ if TOKEN is None:
     print("Errore: il token del bot non è stato trovato. Assicurati che la variabile d'ambiente 'TOKEN' sia impostata correttamente.")
 else:
     # Avvio del bot utilizzando il token
-    bot.run(TOKEN)
+    client.run(TOKEN)
