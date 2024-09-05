@@ -10,8 +10,8 @@ TOKEN = os.getenv('TOKEN')
 intents = discord.Intents.default()
 intents.message_content = True
 
-# Crea l'istanza del bot
-bot = commands.Bot(command_prefix='!', intents=intents)
+# Crea l'istanza del bot senza command_prefix
+bot = commands.Bot(intents=intents)
 
 # Definisce un albero di comandi slash
 tree = bot.tree
@@ -25,10 +25,7 @@ async def on_ready():
 # Comando slash che risponde con "Ciao!" quando l'utente invia il comando /ciao
 @tree.command(name='ciao', description='Risponde con Ciao!')
 async def ciao(interaction: discord.Interaction):
-    try:
-        await interaction.response.send_message('Ciao!')
-    except Exception as e:
-        print(f"Errore nell'invio del messaggio: {e}")
+    await interaction.response.send_message('Ciao!')
 
 # Avvio del bot (inserisci il tuo token del bot qui)
 webserver.keep_alive()
